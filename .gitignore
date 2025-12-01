@@ -10,6 +10,13 @@ lib/
 /build/
 *.dwarf
 
+# Data files
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.db
+
 # IDE
 .vscode/
 .idea/

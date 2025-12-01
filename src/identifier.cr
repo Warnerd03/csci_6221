@@ -24,8 +24,8 @@ module MTGIdentifier
     # Database module for loading and querying identifier data
     module DB
         # Path constants
-        FULL_PATH = File.join(__DIR__, "../data/AllIdentifiers.json")
-        INDEX_PATH = File.join(__DIR__, "../data/ident_name_index.json")
+        FULL_PATH = File.join(__DIR__, "../data/raw/AllIdentifiers.json")
+        INDEX_PATH = File.join(__DIR__, "../data/processed/ident_name_index.json")
 
         # Class variables
         @@all : AllIdentifiers?
