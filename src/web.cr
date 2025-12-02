@@ -1,8 +1,9 @@
 # src/web.cr
 require "kemal"
+require "ecr"
 
 get "/" do
-    "Welcome to the MTG Project!"
+    ECR.render("views/index.ecr")
 end
 
 get "/api/ping" do
