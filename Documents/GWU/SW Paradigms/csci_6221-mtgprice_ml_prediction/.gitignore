@@ -1,0 +1,45 @@
+# Dependencies
+lib/
+.crystal/
+*.o
+*.a
+*.so
+
+# Build artifacts
+/bin/
+/build/
+*.dwarf
+
+# Data files
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ML-specific
+*.pkl
+*.joblib
+*.h5
+*.model
+*.weights
+__pycache__/
+*.pyc
+venv/
+env/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+.cache/

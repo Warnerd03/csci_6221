@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>PriceCast · MTG Price Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body class="pc-body pc-body--dark">
+    <!-- Header / Navbar -->
+    <header class="pc-header pc-header--dark">
+      <div class="pc-header-inner">
+        <div class="pc-brand">
+          <div class="pc-brand-mark">PC</div>
+          <div>
+            <div class="pc-brand-name">PriceCast</div>
+            <div class="pc-brand-tagline">MTG card price explorer & demo model</div>
+          </div>
+        </div>
+
+        <nav class="pc-nav">
+          <a href="#overview" class="pc-nav-link pc-nav-link--active">Overview</a>
+          <a href="#demos" class="pc-nav-link">Demo cards</a>
+          <a href="#how-it-works" class="pc-nav-link">How it works</a>
+          <a href="/about" class="pc-nav-link">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pc-main">
+      <!-- Hero: overview + search + demos merged -->
+      <section id="overview" class="pc-hero pc-hero--dark">
+        <!-- Left: text + search -->
+        <div class="pc-hero-left">
+          <h1 class="pc-hero-title">
+            PriceCast helps you read the story behind MTG card prices.
+          </h1>
+          <p class="pc-hero-subtitle">
+            This demo takes a slice of MTGJSON data and fits simple regression
+            models per card, so you can see how prices are trending rather than
+            just staring at a single number.
+          </p>
+
+          <form class="pc-search-strip-form" action="/search" method="get">
+            <input
+              class="pc-search-strip-input pc-search-strip-input--dark"
+              type="text"
+              name="q"
+              placeholder="Search by card name or UUID (e.g. &quot;The One Ring&quot;)"
+            />
+            <button class="pc-btn pc-btn--primary" type="submit">
+              Search
+            </button>
+          </form>
+          <p class="pc-search-strip-hint pc-search-strip-hint--dark">
+            Demo suggestions:
+            <button type="button" class="pc-pill pc-pill--dark">The One Ring</button>
+            <button type="button" class="pc-pill pc-pill--dark">Sol Ring</button>
+            <button type="button" class="pc-pill pc-pill--dark">Black Lotus</button>
+          </p>
+        </div>
+
+        <!-- Right: featured card + demo list -->
+        <div id="demos" class="pc-hero-right">
+          <!-- Featured demo card -->
+          <div class="pc-feature-card">
+            <img
+              class="pc-feature-card-image"
+              src="/images/ltr-246-the-one-ring.png"
+              alt="The One Ring MTG Card"
+            />
+            <div class="pc-feature-card-body">
+              <div class="pc-feature-card-name">The One Ring</div>
+              <div class="pc-feature-card-meta">
+                Tales of Middle-earth (LTR) · #246 · Mythic
+              </div>
+              <div class="pc-feature-card-row">
+                <span class="pc-feature-card-label">Demo predicted price</span>
+                <span class="pc-feature-card-price">$72.34</span>
+              </div>
+              <a href="/card/demo-the-one-ring" class="pc-btn pc-btn--outline">
+                Open card demo
+              </a>
+            </div>
+          </div>
+
+          <!-- Other demo cards, merged into same area -->
+          <div class="pc-demo-list">
+            <div class="pc-demo-list-header">Other demo cards</div>
+            <div class="pc-demo-row">
+              <a class="pc-demo-card pc-demo-card--compact" href="/card/demo-sol-ring">
+                <div class="pc-demo-card-name">Sol Ring</div>
+                <div class="pc-demo-card-meta">Commander staple</div>
+                <div class="pc-demo-card-row">
+                  <span>Predicted</span>
+                  <span class="pc-demo-card-price">$3.15</span>
+                </div>
+              </a>
+
+              <a class="pc-demo-card pc-demo-card--compact" href="/card/demo-black-lotus">
+                <div class="pc-demo-card-name">Black Lotus</div>
+                <div class="pc-demo-card-meta">Alpha · Reserved List</div>
+                <div class="pc-demo-card-row">
+                  <span>Predicted</span>
+                  <span class="pc-demo-card-price">$25,000.00</span>
+                </div>
+              </a>
+
+              <a class="pc-demo-card pc-demo-card--compact" href="/card/demo-ragavan">
+                <div class="pc-demo-card-name">Ragavan, Nimble Pilferer</div>
+                <div class="pc-demo-card-meta">Modern Horizons 2</div>
+                <div class="pc-demo-card-row">
+                  <span>Predicted</span>
+                  <span class="pc-demo-card-price">$58.90</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section id="how-it-works" class="pc-section">
+        <div class="pc-section-header">
+          <h2 class="pc-section-title">How PriceCast works (demo)</h2>
+          <p class="pc-section-subtitle">
+            A high-level outline you can walk through while pointing at the interface.
+          </p>
+        </div>
+
+        <div class="pc-info-grid">
+          <div class="pc-info-card">
+            <div class="pc-info-title">1. Ingest MTGJSON</div>
+            <p class="pc-info-text">
+              Use MTGJSON datasets (AtomicCards, AllPrices, etc.) and extract a focused
+              subset of cards and their price histories.
+            </p>
+          </div>
+          <div class="pc-info-card">
+            <div class="pc-info-title">2. Build price series</div>
+            <p class="pc-info-text">
+              Construct clean time series per card and store them in a processed index
+              that the web app can load quickly.
+            </p>
+          </div>
+          <div class="pc-info-card">
+            <div class="pc-info-title">3. Fit simple models</div>
+            <p class="pc-info-text">
+              Fit a linear regression per card over a recent window (e.g., 30–90 days)
+              to estimate trend and a demo predicted value.
+            </p>
+          </div>
+          <div class="pc-info-card">
+            <div class="pc-info-title">4. Present the story</div>
+            <p class="pc-info-text">
+              Show a headline price, a visual history, and short context about what the
+              model is and isn’t capturing—rather than just a raw number.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pc-footer pc-footer--dark">
+      <div class="pc-footer-inner">
+        <span>PriceCast · MTG price demo</span>
+        <span class="pc-footer-tags">
+          Built with Crystal · Kemal · MTGJSON
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>
