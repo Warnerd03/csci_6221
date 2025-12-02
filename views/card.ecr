@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>PriceCast · <%= card_name %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body class="pc-body pc-body--dark">
+    <!-- Header / Navbar -->
+    <header class="pc-header pc-header--dark">
+      <div class="pc-header-inner">
+        <div class="pc-brand">
+          <div class="pc-brand-mark">PC</div>
+          <div>
+            <div class="pc-brand-name">PriceCast</div>
+            <div class="pc-brand-tagline">MTG card price explorer & demo model</div>
+          </div>
+        </div>
+
+        <nav class="pc-nav">
+          <a href="/#overview" class="pc-nav-link">Overview</a>
+          <a href="/#demos" class="pc-nav-link pc-nav-link--active">Demo cards</a>
+          <a href="/#how-it-works" class="pc-nav-link">How it works</a>
+          <a href="/about" class="pc-nav-link">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pc-main pc-main--card">
+      <a href="/#demos" class="pc-back-link">← Back to demo cards</a>
+
+      <!-- Top: card summary -->
+      <section class="pc-card-layout">
+        <!-- Image -->
+        <div class="pc-card-image-panel">
+          <img
+            class="pc-card-image"
+            src="<%= image_path %>"
+            alt="<%= card_name %> MTG Card"
+          />
+          <div class="pc-card-image-caption">
+            Demo placeholder image: <%= card_name %>
+          </div>
+        </div>
+
+        <!-- Details -->
+        <div class="pc-card-detail-panel">
+          <h1 class="pc-card-title"><%= card_name %></h1>
+          <p class="pc-card-subtitle"><%= set_line %></p>
+
+          <div class="pc-card-price-row">
+            <div class="pc-card-price-block">
+              <div class="pc-card-price-label">Current demo predicted price</div>
+              <div class="pc-card-price-value"><%= predicted_price %></div>
+            </div>
+            <div class="pc-card-price-block">
+              <div class="pc-card-price-label">Example recent market price</div>
+              <div class="pc-card-price-value pc-card-price-value--muted"><%= recent_price %></div>
+            </div>
+          </div>
+
+          <div class="pc-card-description">
+            <h2 class="pc-card-section-title">Overview</h2>
+            <p>
+              This view shows how PriceCast could present a single card's
+              price story. The production version would pull a full time
+              series from MTGJSON, fit a per-card regression, and update
+              this summary automatically.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Middle: graph area -->
+      <section class="pc-card-graph">
+        <div class="pc-card-graph-header">
+          <h2 class="pc-card-section-title">Price history (demo)</h2>
+          <span class="pc-card-graph-range"><%= history_range %></span>
+        </div>
+
+        <div class="pc-card-graph-placeholder">
+          <!-- Placeholder now; later you can insert a chart here -->
+          <div class="pc-card-graph-line"></div>
+          <div class="pc-card-graph-axis">
+            <span>Start</span>
+            <span>Now</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom: textual history / notes -->
+      <section class="pc-card-history">
+        <h2 class="pc-card-section-title">Recent price points (example)</h2>
+        <ul class="pc-card-history-list">
+          <% demo_points.each do |label, value| %>
+            <li>
+              <span class="pc-card-history-date"><%= label %></span>
+              <span class="pc-card-history-value"><%= value %></span>
+            </li>
+          <% end %>
+        </ul>
+
+        <div class="pc-card-footer-note">
+          All values on this page are demo placeholders. The full project would
+          compute them from live or regularly refreshed MTGJSON price feeds and
+          a per-card regression model.
+        </div>
+      </section>
+    </main>
+
+    <footer class="pc-footer pc-footer--dark">
+      <div class="pc-footer-inner">
+        <span>PriceCast · Card detail demo</span>
+        <span class="pc-footer-tags">
+          Prototype · Not financial advice
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>PriceCast · Search results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body class="pc-body pc-body--dark">
+    <header class="pc-header pc-header--dark">
+      <div class="pc-header-inner">
+        <div class="pc-brand">
+          <div class="pc-brand-mark">PC</div>
+          <div>
+            <div class="pc-brand-name">PriceCast</div>
+            <div class="pc-brand-tagline">MTG card price explorer & demo model</div>
+          </div>
+        </div>
+
+        <nav class="pc-nav">
+          <a href="/#overview" class="pc-nav-link">Overview</a>
+          <a href="/#demos" class="pc-nav-link">Demo cards</a>
+          <a href="/#how-it-works" class="pc-nav-link">How it works</a>
+          <a href="/about" class="pc-nav-link">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pc-main">
+      <section class="pc-search-results-header">
+        <h1 class="pc-search-results-title">Search results</h1>
+        <p class="pc-search-results-subtitle">
+          Showing demo matches for
+          <strong><%= query.empty? ? "(empty search)" : query %></strong>.
+        </p>
+      </section>
+
+      <% if matched_cards.empty? %>
+        <p class="pc-results-empty">
+          No demo cards matched this query. For the demo, try:
+          "The One Ring", "Sol Ring", "Black Lotus", or "Ragavan".
+        </p>
+      <% else %>
+        <div class="pc-results-list">
+          <% matched_cards.each do |card| %>
+            <a href="<%= card[:path] %>" class="pc-result-card">
+              <div class="pc-result-name"><%= card[:name] %></div>
+              <div class="pc-result-meta"><%= card[:set_line] %></div>
+              <div class="pc-result-row">
+                <span>Predicted</span>
+                <span><%= card[:predicted_price] %></span>
+              </div>
+            </a>
+          <% end %>
+        </div>
+      <% end %>
+    </main>
+
+    <footer class="pc-footer pc-footer--dark">
+      <div class="pc-footer-inner">
+        <span>PriceCast · MTG price demo</span>
+        <span class="pc-footer-tags">
+          Built with Crystal · Kemal · MTGJSON
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

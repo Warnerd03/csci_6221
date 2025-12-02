@@ -1,0 +1,16 @@
+name: mtg_price_tools
+version: 0.1.0
+
+authors:
+  - Oliver Krisetya
+  - Warren Nguyen
+
+targets:
+  mtg_price_tools:
+    main: src/parsing.cr
+  web:
+    main: src/web.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
