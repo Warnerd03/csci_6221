@@ -6,12 +6,14 @@ require "../src/identifier"
 include MTGIdentifier
 
 # Load full AllIdentifiers dataset
-full_path = File.join(__DIR__, "../data/AllIdentifiers.json")
-index_path = File.join(__DIR__, "../data/ident_name_index.json")
+input_path = ARGV[0]? || File.join(__DIR__, "../data/AllIdentifiers.json")
+output_path = ARGV[1]? || File.join(__DIR__, "../data/ident_name_index.json")
 
-include MTGIdentifier
+unless File.exists?(input_path)
+    raise "AllIdentifiers.json not found at #{input_path}"
+end
 
-text = File.read(full_path)
+text = File.read(input_path)
 all  = AllIdentifiers.from_json(text)
 
 name_index = Hash(String, Array(String)).new { |h, k| h[k] = [] of String } 
@@ -20,6 +22,10 @@ all.data.each do |uuid, ident|
     name_index[ident.name] << uuid
 end
 
-File.write(index_path, name_index.to_json)
+File.open(output_path, "w") do |file|
+    JSON.build(file, indent: 2) do |builder|
+        index.to_json(builder)
+    end
+end
 
-puts "Wrote name index with #{name_index.size} names to #{index_path}"
+puts "Wrote name index with #{name_index.size} names to #{output_path}"

@@ -34,6 +34,25 @@ module MTGPrice
         property meta : Meta
         property data : Hash(String, PriceFormats)
     end
+
+    module DB
+        FULL_PATH = File.join(__DIR__, "../data/raw/AllPricesToday.json")
+        
+        @@all : AllPrices?
+        @@all_today : AllPrices?
+        
+        def self.all : AllPrices
+            if all = @@all
+                all
+            else
+                unless File.exists?(FULL_PATH)
+                    raise "AllPricesToday.json not found at #{FULL_PATH}"
+                end
+                text = File.read(FULL_PATH)
+                @@all = AllPrices.from_json(text)
+            end
+        end
+    end
 end
 
 # include MTGPrice
