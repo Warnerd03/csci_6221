@@ -1,4 +1,4 @@
-/* ---------- Base ---------- */
+/* ---------- Reset / base ---------- */
 
 *,
 *::before,
@@ -51,10 +51,6 @@ body.pc-body {
     padding: 18px 18px 32px;
 }
 
-.pc-main--card {
-    padding-top: 16px;
-}
-
 .pc-footer {
     border-top: 1px solid rgba(55, 65, 81, 0.8);
 }
@@ -87,7 +83,6 @@ body.pc-body {
     height: 30px;
     border-radius: 999px;
     background: #f97316;
-    /* simple single color */
     color: #111827;
     font-size: 13px;
     font-weight: 700;
@@ -118,6 +113,10 @@ body.pc-body {
     color: #9ca3af;
     padding: 5px 10px;
     border-radius: 999px;
+    transition:
+        color 0.15s ease,
+        background 0.15s ease,
+        transform 0.15s ease;
 }
 
 .pc-nav-link:hover {
@@ -184,7 +183,7 @@ body.pc-body {
     border: 1px solid rgba(75, 85, 99, 0.9);
 }
 
-/* ---------- Hero (overview + search + demos) ---------- */
+/* ---------- Hero layout + feature card (shared) ---------- */
 
 .pc-hero {
     display: grid;
@@ -193,6 +192,7 @@ body.pc-body {
 }
 
 .pc-hero--dark {
+    margin-top: 18px;
     margin-bottom: 24px;
 }
 
@@ -202,6 +202,13 @@ body.pc-body {
     padding: 18px 20px 20px;
     border: 1px solid rgba(55, 65, 81, 0.9);
     box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
+    align-self: start;
+}
+
+.pc-hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .pc-hero-title {
@@ -215,56 +222,7 @@ body.pc-body {
     color: #e5e7eb;
 }
 
-/* Search inside hero */
-
-.pc-search-strip-form {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 4px;
-}
-
-.pc-search-strip-input {
-    flex: 1;
-    border-radius: 999px;
-    border: 1px solid #d1d5db;
-    padding: 8px 12px;
-    font-size: 14px;
-}
-
-.pc-search-strip-input--dark {
-    border-color: rgba(75, 85, 99, 0.9);
-    background: rgba(15, 23, 42, 0.95);
-    color: #e5e7eb;
-}
-
-.pc-search-strip-input--dark::placeholder {
-    color: #6b7280;
-}
-
-.pc-search-strip-input--dark:focus {
-    outline: none;
-    border-color: #f97316;
-}
-
-.pc-search-strip-hint {
-    margin: 4px 0 0;
-    font-size: 12px;
-}
-
-.pc-search-strip-hint--dark {
-    color: #9ca3af;
-}
-
-/* Right: featured card + demo list */
-
-.pc-hero-right {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* Featured card */
+/* Feature card on right */
 
 .pc-feature-card {
     background: radial-gradient(circle at top, #0f172a 0, #020617 70%);
@@ -277,7 +235,6 @@ body.pc-body {
 .pc-feature-card-image {
     display: block;
     max-height: 360px;
-    /* slightly larger */
     width: auto;
     margin: 0 auto 10px;
     border-radius: 10px;
@@ -317,113 +274,14 @@ body.pc-body {
     color: #4ade80;
 }
 
-/* Demo list merged into hero */
-
-.pc-demo-list {
-    background: rgba(15, 23, 42, 0.9);
-    border-radius: 16px;
-    padding: 10px 10px 12px;
-    border: 1px solid rgba(55, 65, 81, 0.9);
-}
-
-.pc-demo-list-header {
-    font-size: 13px;
-    margin-bottom: 6px;
-    color: #e5e7eb;
-}
-
-.pc-demo-row {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-}
-
-.pc-demo-row::-webkit-scrollbar {
-    height: 6px;
-}
-
-.pc-demo-row::-webkit-scrollbar-thumb {
-    background: rgba(75, 85, 99, 0.9);
-    border-radius: 999px;
-}
-
-.pc-demo-card {
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    text-decoration: none;
-    color: #e5e7eb;
-    border-radius: 12px;
-    padding: 8px 10px;
-    border: 1px solid rgba(55, 65, 81, 0.9);
-    background: rgba(17, 24, 39, 0.95);
-    font-size: 13px;
-}
-
-.pc-demo-card--compact {
-    min-width: 190px;
-    max-width: 220px;
-}
-
-.pc-demo-card:hover {
-    border-color: #f97316;
-}
-
-.pc-demo-card-name {
-    font-weight: 600;
-}
-
-.pc-demo-card-meta {
-    font-size: 11px;
-    color: #9ca3af;
-}
-
-.pc-demo-card-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-.pc-demo-card-price {
-    font-weight: 600;
-    color: #4ade80;
-}
-
-/* ---------- Sections: How it works ---------- */
-
-.pc-section {
-    margin-top: 26px;
-}
-
-.pc-section-header {
-    margin-bottom: 12px;
-}
-
-.pc-section-title {
-    margin: 0 0 4px;
-    font-size: 18px;
-}
-
-.pc-section-subtitle {
-    margin: 0;
-    font-size: 13px;
-    color: #9ca3af;
-}
-
-.pc-info-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-}
+/* ---------- Info cards (used in hero/how-it-works and elsewhere) ---------- */
 
 .pc-info-card {
     background: rgba(15, 23, 42, 0.95);
     border-radius: 14px;
     border: 1px solid rgba(55, 65, 81, 0.9);
     padding: 12px;
-    font-size: 13px;
+    font-size: 16px;
     box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
 }
 
@@ -435,9 +293,10 @@ body.pc-body {
 .pc-info-text {
     margin: 0;
     color: #d1d5db;
+    font-size: 15px;
 }
 
-/* ---------- Card detail page ---------- */
+/* ---------- Card detail page (shared) ---------- */
 
 .pc-back-link {
     display: inline-block;
@@ -531,16 +390,7 @@ body.pc-body {
     font-size: 16px;
 }
 
-.pc-card-description {
-    margin-bottom: 10px;
-}
-
-.pc-card-section-title {
-    margin: 0 0 4px;
-    font-size: 15px;
-}
-
-/* Graph area */
+/* graph area */
 
 .pc-card-graph {
     margin-bottom: 16px;
@@ -587,10 +437,15 @@ body.pc-body {
     color: #9ca3af;
 }
 
-/* History list */
+/* card history */
 
 .pc-card-history {
     margin-bottom: 16px;
+}
+
+.pc-card-section-title {
+    margin: 0 0 4px;
+    font-size: 15px;
 }
 
 .pc-card-history-list {
@@ -621,65 +476,7 @@ body.pc-body {
     color: #9ca3af;
 }
 
-/* ---------- Search results page ---------- */
-
-.pc-search-results-header {
-    margin-bottom: 12px;
-}
-
-.pc-search-results-title {
-    margin: 0 0 4px;
-    font-size: 18px;
-}
-
-.pc-search-results-subtitle {
-    margin: 0;
-    font-size: 13px;
-    color: #9ca3af;
-}
-
-.pc-results-empty {
-    font-size: 13px;
-    color: #9ca3af;
-}
-
-.pc-results-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.pc-result-card {
-    background: rgba(15, 23, 42, 0.95);
-    border-radius: 12px;
-    padding: 10px 12px;
-    border: 1px solid rgba(55, 65, 81, 0.9);
-    text-decoration: none;
-    color: #e5e7eb;
-    font-size: 13px;
-}
-
-.pc-result-card:hover {
-    border-color: #f97316;
-}
-
-.pc-result-name {
-    font-weight: 600;
-}
-
-.pc-result-meta {
-    font-size: 12px;
-    color: #9ca3af;
-}
-
-.pc-result-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 4px;
-}
-
-/* ---------- About page ---------- */
+/* ---------- About page shared bits ---------- */
 
 .pc-about-layout {
     display: grid;
@@ -713,6 +510,23 @@ body.pc-body {
     color: #e5e7eb;
 }
 
+/* ---------- Section headers (generic) ---------- */
+
+.pc-section-header {
+    margin-bottom: 12px;
+}
+
+.pc-section-title {
+    margin: 0 0 4px;
+    font-size: 18px;
+}
+
+.pc-section-subtitle {
+    margin: 0;
+    font-size: 13px;
+    color: #9ca3af;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 900px) {
@@ -733,10 +547,6 @@ body.pc-body {
     .pc-header-inner {
         flex-direction: column;
         align-items: flex-start;
-    }
-
-    .pc-info-grid {
-        grid-template-columns: minmax(0, 1fr);
     }
 
     .pc-footer-inner {

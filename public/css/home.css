@@ -1,0 +1,199 @@
+.pc-main--home {
+    padding-top: 18px;
+}
+
+/* --- search strip at top --- */
+
+.pc-search-strip {
+    margin-bottom: 18px;
+    background: rgba(15, 23, 42, 0.95);
+    border-radius: 16px;
+    padding: 12px 14px 10px;
+    border: 1px solid rgba(55, 65, 81, 0.9);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.7);
+}
+
+.pc-search-strip-form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.pc-search-strip-input {
+    flex: 1;
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.pc-search-strip-input--dark {
+    border-color: rgba(75, 85, 99, 0.9);
+    background: rgba(15, 23, 42, 0.95);
+    color: #e5e7eb;
+}
+
+.pc-search-strip-input--dark::placeholder {
+    color: #6b7280;
+}
+
+.pc-search-strip-input--dark:focus {
+    outline: none;
+    border-color: #f97316;
+}
+
+.pc-search-strip-hint,
+.pc-search-strip-meta {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #9ca3af;
+    text-align: center;
+}
+
+.pc-meta-highlight {
+    color: #f97316;
+    font-weight: 500;
+}
+
+/* --- how it works block inside hero --- */
+
+.pc-hero-how {
+    margin-top: 14px;
+    flex: 1;
+    /* take remaining height in pc-hero-left */
+    display: flex;
+    flex-direction: column;
+}
+
+.pc-hero-how-title {
+    font-size: 17px;
+    margin: 0 0 6px;
+}
+
+.pc-hero-how-grid {
+    flex: 1;
+    /* fill the height of pc-hero-how */
+    display: grid;
+    grid-auto-rows: 1fr;
+    /* each row is equal height */
+    gap: 12px;
+}
+
+@media (max-width: 900px) {
+    .pc-hero-how-grid {
+        grid-template-columns: minmax(0, 1fr);
+        grid-auto-rows: auto;
+        /* stack naturally on mobile */
+    }
+}
+
+/* --- demo preview tiles on right side of home hero --- */
+
+.pc-demo-section {
+    margin-top: 12px;
+    background: rgba(15, 23, 42, 0.95);
+    border-radius: 16px;
+    padding: 10px 12px 12px;
+    border: 1px solid rgba(55, 65, 81, 0.9);
+}
+
+.pc-demo-title {
+    margin: 0 0 4px;
+    font-size: 16px;
+}
+
+.pc-demo-subtitle {
+    margin: 0 0 8px;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+/* Horizontal scrolling strip */
+.pc-demo-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin: 0 -4px 0 0;
+    /* tiny edge breathing room */
+    scroll-snap-type: x mandatory;
+}
+
+/* Optional: nicer scrollbar on WebKit (Chrome/Safari) */
+.pc-demo-grid::-webkit-scrollbar {
+    height: 6px;
+}
+
+.pc-demo-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.pc-demo-grid::-webkit-scrollbar-thumb {
+    background: rgba(55, 65, 81, 0.9);
+    border-radius: 999px;
+}
+
+/* Each demo card is a fixed-width tile in the strip */
+.pc-demo-card-tile {
+    flex: 0 0 auto;
+    min-width: 190px;
+    max-width: 220px;
+    scroll-snap-align: start;
+
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    background: rgba(17, 24, 39, 0.95);
+    border-radius: 12px;
+    border: 1px solid rgba(55, 65, 81, 0.9);
+    text-decoration: none;
+    color: #e5e7eb;
+    font-size: 13px;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.pc-demo-card-tile:hover {
+    border-color: #f97316;
+    box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.35);
+}
+
+.pc-demo-card-header {
+    margin-bottom: 4px;
+}
+
+.pc-demo-card-name {
+    font-weight: 600;
+}
+
+.pc-demo-card-set {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.pc-demo-card-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.pc-demo-card-label {
+    color: #9ca3af;
+}
+
+.pc-demo-card-price {
+    color: #4ade80;
+    font-weight: 600;
+}
+
+
+
+
+/* Make left hero stretch to match the grid row height */
+.pc-main--home .pc-hero-left {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+}

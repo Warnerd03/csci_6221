@@ -2,58 +2,67 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>PriceCast · Search results</title>
+    <title>PriceCast · Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/search.css">
   </head>
   <body class="pc-body pc-body--dark">
-    <header class="pc-header pc-header--dark">
-      <div class="pc-header-inner">
-        <div class="pc-brand">
-          <div class="pc-brand-mark">PC</div>
-          <div>
-            <div class="pc-brand-name">PriceCast</div>
-            <div class="pc-brand-tagline">MTG card price explorer & demo model</div>
-          </div>
-        </div>
+    <%= ECR.render("views/partials/_navbar.ecr") %>
 
-        <nav class="pc-nav">
-          <a href="/#overview" class="pc-nav-link">Overview</a>
-          <a href="/#demos" class="pc-nav-link">Demo cards</a>
-          <a href="/#how-it-works" class="pc-nav-link">How it works</a>
-          <a href="/about" class="pc-nav-link">About</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="pc-main">
-      <section class="pc-search-results-header">
-        <h1 class="pc-search-results-title">Search results</h1>
-        <p class="pc-search-results-subtitle">
-          Showing demo matches for
-          <strong><%= query.empty? ? "(empty search)" : query %></strong>.
+    <main class="pc-main pc-main--search">
+      <!-- Search strip again -->
+      <section class="pc-search-strip pc-search-strip--dark">
+        <form class="pc-search-strip-form" action="/search" method="get">
+          <input
+            class="pc-search-strip-input pc-search-strip-input--dark"
+            type="text"
+            name="q"
+            value="<%= query %>"
+            placeholder="Search by card name or UUID"
+          />
+          <button class="pc-btn pc-btn--primary" type="submit">
+            Search
+          </button>
+        </form>
+        <p class="pc-search-strip-hint pc-search-strip-hint--dark">
+          Try demo cards:
+          <button type="button" class="pc-pill pc-pill--dark">The One Ring</button>
+          <button type="button" class="pc-pill pc-pill--dark">Sol Ring</button>
+          <button type="button" class="pc-pill pc-pill--dark">Black Lotus</button>
         </p>
       </section>
 
-      <% if matched_cards.empty? %>
-        <p class="pc-results-empty">
-          No demo cards matched this query. For the demo, try:
-          "The One Ring", "Sol Ring", "Black Lotus", or "Ragavan".
-        </p>
-      <% else %>
-        <div class="pc-results-list">
-          <% matched_cards.each do |card| %>
-            <a href="<%= card[:path] %>" class="pc-result-card">
-              <div class="pc-result-name"><%= card[:name] %></div>
-              <div class="pc-result-meta"><%= card[:set_line] %></div>
-              <div class="pc-result-row">
-                <span>Predicted</span>
-                <span><%= card[:predicted_price] %></span>
-              </div>
-            </a>
-          <% end %>
+      <section class="pc-search-results">
+        <div class="pc-search-results-header">
+          <h1 class="pc-search-results-title">Search results</h1>
+          <p class="pc-search-results-subtitle">
+            Showing demo matches for
+            <strong><%= query.empty? ? "(empty search)" : query %></strong>.
+          </p>
         </div>
-      <% end %>
+
+        <% if matched_cards.empty? %>
+          <p class="pc-results-empty">
+            No demo cards matched this query. For the demo, try:
+            "The One Ring", "Sol Ring", "Black Lotus", or "Ragavan".
+          </p>
+        <% else %>
+          <div class="pc-results-list">
+            <% matched_cards.each do |card| %>
+              <a href="<%= card[:path] %>" class="pc-result-card">
+                <div class="pc-result-name"><%= card[:name] %></div>
+                <div class="pc-result-meta"><%= card[:set_line] %></div>
+                <div class="pc-result-row">
+                  <span>Predicted</span>
+                  <span><%= card[:predicted_price] %></span>
+                </div>
+              </a>
+            <% end %>
+          </div>
+        <% end %>
+      </section>
     </main>
 
     <footer class="pc-footer pc-footer--dark">

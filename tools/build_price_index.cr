@@ -87,23 +87,25 @@ module MTGPriceIndex
     end
 end
 
-input_path = ARGV[0]? || File.join(__DIR__, "../data/raw/AllPricesToday.json")
-output_path = ARGV[1]? || File.join(__DIR__, "../data/processed/price_index.json")
+if __FILE__ == PROGRAM_NAME
+    input_path  = ARGV[0]? || File.join(__DIR__, "../data/raw/AllPrices.json")
+    output_path = ARGV[1]? || File.join(__DIR__, "../data/processed/price_index.json")
 
-unless File.exists?(input_path)
-    STDERR.puts "Error: input file not found: #{input_path}"
-    exit 1
-end
-
-text = File.read(input_path)
-all = MTGPrice::AllPrices.from_json(text)
-
-index = MTGPriceIndex.build_from(all)
-
-File.open(output_path, "w") do |file|
-    JSON.build(file, indent: 2) do |builder|
-        index.to_json(builder)
+    unless File.exists?(input_path)
+        STDERR.puts "Error: input file not found: #{input_path}"
+        exit 1
     end
-end
 
-puts "Wrote price index with #{index.series.size} series to #{output_path}"
+    text = File.read(input_path)
+    all  = MTGPrice::AllPrices.from_json(text)
+
+    index = MTGPriceIndex.build_from(all)
+
+    File.open(output_path, "w") do |file|
+        JSON.build(file, indent: 2) do |builder|
+        index.to_json(builder)
+        end
+    end
+
+    puts "Wrote price index with #{index.series.size} series to #{output_path}"
+end

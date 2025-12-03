@@ -14,3 +14,5 @@ targets:
 dependencies:
   kemal:
     github: kemalcr/kemal
+  crystal-ml:
+    github: manastech/crystal-ml
