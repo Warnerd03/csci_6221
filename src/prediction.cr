@@ -7,7 +7,7 @@ def train_model(points)
 
   x = (0...sorted_points.size).map { |i| [i.to_f] }
   y = sorted_points.map { |p| p[:price].to_f }
-  # Polynomial features (degree 3)
+
   x_poly = x.map { |row| [row[0], row[0]**2, row[0]**3] }
 
   model = CrystalML::Regression::LinearRegression.new
@@ -22,7 +22,6 @@ def predict_next(model_data)
   model = model_data[:model]
   n_points = model_data[:n_points]
 
-  # Next index
   next_x = n_points.to_f
   next_x_poly = [[next_x, next_x**2, next_x**3]]
 
