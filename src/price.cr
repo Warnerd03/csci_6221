@@ -36,7 +36,7 @@ module MTGPrice
     end
 
     module DB
-        FULL_PATH = File.join(__DIR__, "../data/raw/AllPricesToday.json")
+        FULL_PATH = File.join(__DIR__, "../data/raw/AllPrices.json")
         
         @@all : AllPrices?
         @@all_today : AllPrices?

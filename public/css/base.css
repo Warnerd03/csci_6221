@@ -113,6 +113,10 @@ body.pc-body {
     color: #9ca3af;
     padding: 5px 10px;
     border-radius: 999px;
+    transition:
+        color 0.15s ease,
+        background 0.15s ease,
+        transform 0.15s ease;
 }
 
 .pc-nav-link:hover {

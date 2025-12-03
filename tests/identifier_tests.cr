@@ -29,6 +29,7 @@ end
 # 4) Fuzzy search
 puts
 puts "Search names containing 'Sphinx':"
+[""]
 MTGIdentifier::DB.search_names("Sphinx").first(5).each do |u, info|
     puts "- #{u} | #{info.name}"
 end
