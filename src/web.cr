@@ -21,7 +21,7 @@ DEMO_CARDS = {
   "demo-sol-ring" => {
     name: "Sol Ring",
     set_line: "Various sets · Commander staple",
-    image_path: "/images/ltr-246-the-one-ring.png", # placeholder image
+    image_path: "/images/c17-223-sol-ring.jpg", # placeholder image
     predicted_price: "$3.15",
     recent_price: "$2.90",
     history_range: "Last 90 days",
@@ -36,7 +36,7 @@ DEMO_CARDS = {
   "demo-black-lotus" => {
     name: "Black Lotus",
     set_line: "Alpha · Reserved List",
-    image_path: "/images/ltr-246-the-one-ring.png", # placeholder image
+    image_path: "/images/o90p-2-black-lotus.jpg",
     predicted_price: "$25,000.00",
     recent_price: "$24,200.00",
     history_range: "Last 365 days",
@@ -51,7 +51,7 @@ DEMO_CARDS = {
   "demo-ragavan" => {
     name: "Ragavan, Nimble Pilferer",
     set_line: "Modern Horizons 2",
-    image_path: "/images/ltr-246-the-one-ring.png", # placeholder image
+    image_path: "/images/mh2-138-ragavan-nimble-pilferer.jpg",
     predicted_price: "$58.90",
     recent_price: "$55.00",
     history_range: "Last 60 days",
@@ -66,7 +66,33 @@ DEMO_CARDS = {
 }
 
 get "/" do
-    ECR.render("views/index.ecr")
+  active_nav = :overview
+  demo_cards = DEMO_CARDS.map do |id, data|
+    {
+      path: "/card/#{id}",
+      name: data[:name],
+      set_line: data[:set_line],
+      predicted_price: data[:predicted_price],
+      recent_price: data[:recent_price],
+      note: data[:note]? || "Example of #{data[:name]} price behavior."
+    }
+  end
+  ECR.render("views/index.ecr")
+end
+
+get "/demos" do
+  active_nav = :demos
+  demo_cards = DEMO_CARDS.map do |id, data|
+    {
+      path: "/card/#{id}",
+      name: data[:name],
+      set_line: data[:set_line],
+      predicted_price: data[:predicted_price],
+      recent_price: data[:recent_price],
+      note: data[:note]? || "Example of #{data[:name]} price behavior."
+    }
+  end
+  ECR.render("views/demos.ecr")
 end
 
 # Card detail pages
@@ -89,28 +115,34 @@ end
 
 # Search results page (very simple demo matching by name substring)
 get "/search" do |env|
-    query = env.params.query["q"]?.to_s.strip
-    q_down = query.downcase
+  active_nav = :search
 
-    matched_cards = DEMO_CARDS.map do |id, data|
-        name = data[:name]
-        if q_down.empty? || name.downcase.includes?(q_down)
-        {
-            path: "/card/#{id}",
-            name: name,
-            set_line: data[:set_line],
-            predicted_price: data[:predicted_price],
-        }
-        else
-            nil
-        end
-    end.compact
+  # Query from ?q=...
+  query = env.params.query["q"]?.try &.strip || ""
+  q_down = query.downcase
 
-    ECR.render("views/search.ecr")
+  # Build matched_cards for the template
+  matched_cards = DEMO_CARDS.map do |id, data|
+    name = data[:name]
+    if q_down.empty? || name.downcase.includes?(q_down)
+      {
+        path: "/card/#{id}",
+        name: name,
+        set_line: data[:set_line],
+        predicted_price: data[:predicted_price],
+      }
+    else
+      nil
+    end
+  end.compact
+
+  ECR.render("views/search.ecr")
 end
 
+
 get "/about" do
-    ECR.render("views/about.ecr")
+  active_nav = :about
+  ECR.render("views/about.ecr")
 end
 
 Kemal.run

@@ -4,30 +4,14 @@
     <meta charset="UTF-8">
     <title>PriceCast · About the team</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/about.css">
   </head>
   <body class="pc-body pc-body--dark">
-    <header class="pc-header pc-header--dark">
-      <div class="pc-header-inner">
-        <div class="pc-brand">
-          <div class="pc-brand-mark">PC</div>
-          <div>
-            <div class="pc-brand-name">PriceCast</div>
-            <div class="pc-brand-tagline">MTG card price explorer & demo model</div>
-          </div>
-        </div>
+    <%= ECR.render("views/partials/_navbar.ecr") %>
 
-        <nav class="pc-nav">
-          <a href="/#overview" class="pc-nav-link">Overview</a>
-          <a href="/#demos" class="pc-nav-link">Demo cards</a>
-          <a href="/#how-it-works" class="pc-nav-link">How it works</a>
-          <a href="/about" class="pc-nav-link pc-nav-link--active">About</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="pc-main">
-      <section class="pc-section-header">
+    <main class="pc-main pc-main--about">
+      <section class="pc-section-header pc-section-header--about">
         <h1 class="pc-section-title">About the PriceCast team</h1>
         <p class="pc-section-subtitle">
           A small project built for our course, combining MTGJSON, data processing,
