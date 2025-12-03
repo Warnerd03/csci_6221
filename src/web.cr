@@ -63,10 +63,26 @@ DEMO_CARDS = {
       "Today"       => "$58.90",
     },
   },
+  "demo-bolt" => {
+    name: "Lightning Bolt",
+    set_line: "Jumpstart",
+    image_path: "/images/jmp-342-lightning-bolt.jpg",
+    predicted_price: "$58.90",
+    recent_price: "$55.00",
+    history_range: "Last 60 days",
+    demo_points: {
+      "60 days ago" => "$48.00",
+      "45 days ago" => "$50.50",
+      "30 days ago" => "$52.75",
+      "7 days ago"  => "$56.20",
+      "Today"       => "$58.90",
+    },
+  },
 }
 
+# DEMO_CARDS = JSON.parse(File.read("../data/processed/demo_cards.json"))
+
 get "/" do
-  active_nav = :overview
   demo_cards = DEMO_CARDS.map do |id, data|
     {
       path: "/card/#{id}",
@@ -81,7 +97,6 @@ get "/" do
 end
 
 get "/demos" do
-  active_nav = :demos
   demo_cards = DEMO_CARDS.map do |id, data|
     {
       path: "/card/#{id}",
@@ -115,8 +130,6 @@ end
 
 # Search results page (very simple demo matching by name substring)
 get "/search" do |env|
-  active_nav = :search
-
   # Query from ?q=...
   query = env.params.query["q"]?.try &.strip || ""
   q_down = query.downcase
@@ -137,12 +150,6 @@ get "/search" do |env|
   end.compact
 
   ECR.render("views/search.ecr")
-end
-
-
-get "/about" do
-  active_nav = :about
-  ECR.render("views/about.ecr")
 end
 
 Kemal.run
