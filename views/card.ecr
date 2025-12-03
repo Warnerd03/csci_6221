@@ -4,28 +4,11 @@
     <meta charset="UTF-8">
     <title>PriceCast · <%= card_name %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/card.css">
   </head>
   <body class="pc-body pc-body--dark">
-    <!-- Header / Navbar -->
-    <header class="pc-header pc-header--dark">
-      <div class="pc-header-inner">
-        <div class="pc-brand">
-          <div class="pc-brand-mark">PC</div>
-          <div>
-            <div class="pc-brand-name">PriceCast</div>
-            <div class="pc-brand-tagline">MTG card price explorer & demo model</div>
-          </div>
-        </div>
-
-        <nav class="pc-nav">
-          <a href="/#overview" class="pc-nav-link">Overview</a>
-          <a href="/#demos" class="pc-nav-link pc-nav-link--active">Demo cards</a>
-          <a href="/#how-it-works" class="pc-nav-link">How it works</a>
-          <a href="/about" class="pc-nav-link">About</a>
-        </nav>
-      </div>
-    </header>
+    <%= ECR.render("views/partials/_navbar.ecr") %>
 
     <main class="pc-main pc-main--card">
       <a href="/#demos" class="pc-back-link">← Back to demo cards</a>
@@ -102,9 +85,10 @@
         </ul>
 
         <div class="pc-card-footer-note">
-          All values on this page are demo placeholders. The full project would
-          compute them from live or regularly refreshed MTGJSON price feeds and
-          a per-card regression model.
+          All values on this page are demo placeholders. In the full project, values
+          would be computed from MTGJSON price feeds using a per-card regression model.
+          The dataset is loaded from a snapshot (e.g., AllPrices & AtomicCards as of
+          2025-11-30) and each card uses up to 90 days of historical price data.
         </div>
       </section>
     </main>

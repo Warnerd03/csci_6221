@@ -1,0 +1,12 @@
+.pc-main--about {
+    min-height: calc(100vh - 56px - 48px);
+    padding-top: 24px;
+    padding-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.pc-section-header--about {
+    margin-bottom: 8px;
+}

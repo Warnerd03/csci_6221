@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>PriceCast · Demo cards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/demos.css">
+  </head>
+  <body class="pc-body pc-body--dark">
+    <%= ECR.render("views/partials/_navbar.ecr") %>
+
+    <main class="pc-main pc-main--demos">
+      <section class="pc-section-header pc-section-header--demos">
+        <h1 class="pc-section-title">Demo cards</h1>
+        <p class="pc-section-subtitle">
+          A small curated set of cards that highlight different price behaviors
+          (reprints, hype, reserved list, competitive play).
+        </p>
+      </section>
+
+      <section class="pc-demos-grid">
+        <% demo_cards.each do |card| %>
+          <a href="<%= card[:path] %>" class="pc-demo-card-large">
+            <div class="pc-demo-card-large-header">
+              <div class="pc-demo-card-large-name"><%= card[:name] %></div>
+              <div class="pc-demo-card-large-set"><%= card[:set_line] %></div>
+            </div>
+            <div class="pc-demo-card-large-body">
+              <div class="pc-demo-card-large-prices">
+                <div>
+                  <div class="pc-demo-card-label">Predicted</div>
+                  <div class="pc-demo-card-large-price"><%= card[:predicted_price] %></div>
+                </div>
+                <div>
+                  <div class="pc-demo-card-label">Example recent</div>
+                  <div class="pc-demo-card-large-price pc-demo-card-large-price--muted">
+                    <%= card[:recent_price] %>
+                  </div>
+                </div>
+              </div>
+              <p class="pc-demo-card-large-note"><%= card[:note] %></p>
+            </div>
+          </a>
+        <% end %>
+      </section>
+    </main>
+
+    <footer class="pc-footer pc-footer--dark">
+      <div class="pc-footer-inner">
+        <span>PriceCast · MTG price demo</span>
+        <span class="pc-footer-tags">
+          Built with Crystal · Kemal · MTGJSON
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>
